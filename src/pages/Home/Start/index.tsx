@@ -3,7 +3,7 @@ import { HomeStartContainer, StartButton } from "./styles";
 export function HomeStart() {
   return (
     <HomeStartContainer>
-      <StartButton>Iniciar análise</StartButton>
+      <StartButton to='/analyze'>Iniciar análise</StartButton>
     </HomeStartContainer>
   )
 }

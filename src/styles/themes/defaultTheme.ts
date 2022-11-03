@@ -6,7 +6,10 @@ export const defaultTheme = {
       carrot: '#DA7E3C',
       button: '#F1F4F3'
     },
-    green: '#53C06B',
+    green: {
+      500: "#53C06B",
+      300: "#7ccf8f"
+    },
     yellow: "#EDD70F",
     red: '#E14826'
   }
