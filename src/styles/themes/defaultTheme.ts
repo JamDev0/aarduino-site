@@ -4,6 +4,7 @@ export const defaultTheme = {
     text: {
       text: '#1B1B1B',
       carrot: '#DA7E3C',
+      grape: "#9A20E4",
       button: '#F1F4F3'
     },
     green: {
