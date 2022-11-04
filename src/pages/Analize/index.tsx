@@ -1,0 +1,1 @@
+//parte responsável por começar a analise e enviar os dados para o db json
