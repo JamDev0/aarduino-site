@@ -6,12 +6,15 @@ import { ConnectButton, HomeStartContainer, StartButton } from "./styles";
 export function HomeInitialize() {
   const [isInitialized, setIsInitialized] = useState(false)
 
-  const [dataReded, setDataReded] = useState<string>('')
+  const [isStarted, setIsStarted] = useState(false)
 
-  const { setReader, setWriter, reader } = useSerial()
+  const { setReader, setWriter, writer } = useSerial()
 
-  const decoder = new TextDecoder()
+  const encoder = new TextEncoder()
 
+  // const redirect = useNavigate()
+
+  
   async function init() {
     if('serial' in navigator) {
       try {
@@ -36,17 +39,10 @@ export function HomeInitialize() {
       console.error('Sem porta serial')
     }
   }
-
-
-  async function read() {
-    try {
-      const readerData = await reader!.read();
-      return decoder.decode(readerData.value);
-    } catch (err) {
-      const errorMessage = `error reading data: ${err}`;
-      console.error(errorMessage);
-      return errorMessage;
-    }
+  
+  async function write(data: string): Promise<void> {
+    const dataArrayBuffer = encoder.encode(data);
+    await writer!.write(dataArrayBuffer);
   }
 
   async function handleConnectBtnClick() {
@@ -57,10 +53,21 @@ export function HomeInitialize() {
     }
   }
 
+  async function handleStartBtnClick() {
+    //@ts-ignore
+    await write(1)
+
+    setIsStarted(true)
+  }
+
+  useEffect(() => {
+    console.log(isInitialized)
+  }, [isInitialized])
+
   return (
     <HomeStartContainer>
       <ConnectButton onClick={() => handleConnectBtnClick()}>Conectar</ConnectButton>
-      <StartButton disabled={!isInitialized}>Iniciar leitura</StartButton>
+      <StartButton disabled={!isInitialized} onClick={() => handleStartBtnClick()}>Iniciar leitura</StartButton>
     </HomeStartContainer>
   )
 }
