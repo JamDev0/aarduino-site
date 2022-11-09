@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSerial } from "../../../hooks/useSerial";
 
-import { HomeStartContainer, StartButton } from "./styles";
+import { ConnectButton, HomeStartContainer, StartButton } from "./styles";
 
 export function HomeInitialize() {
   const [isInitialized, setIsInitialized] = useState(false)
 
-  const { setReader, setWriter } = useSerial()
+  const [dataReded, setDataReded] = useState<string>('')
 
-  const redirect = useNavigate()
+  const { setReader, setWriter, reader } = useSerial()
+
+  const decoder = new TextDecoder()
 
   async function init() {
     if('serial' in navigator) {
@@ -24,29 +25,42 @@ export function HomeInitialize() {
 
         const signals = await port.getSignals();
         console.log(signals);
+
+        return true
       } catch(err) {
         console.error('There was an error opening the serial port:', err);
+
+        return false
       }
     } else {
       console.error('Sem porta serial')
     }
   }
 
-  async function handleStartBtnClick() {
-    await init()
 
-    setIsInitialized(true)
+  async function read() {
+    try {
+      const readerData = await reader!.read();
+      return decoder.decode(readerData.value);
+    } catch (err) {
+      const errorMessage = `error reading data: ${err}`;
+      console.error(errorMessage);
+      return errorMessage;
+    }
   }
 
-  useEffect(() => {
-    if(isInitialized) {
-      redirect("/Start")
+  async function handleConnectBtnClick() {
+    const initialized = await init()
+
+    if(initialized) {
+      setIsInitialized(true)
     }
-  }, [isInitialized])
+  }
 
   return (
     <HomeStartContainer>
-      <StartButton onClick={() => handleStartBtnClick()}>Iniciar conexão</StartButton>
+      <ConnectButton onClick={() => handleConnectBtnClick()}>Conectar</ConnectButton>
+      <StartButton disabled={!isInitialized}>Iniciar leitura</StartButton>
     </HomeStartContainer>
   )
 }
