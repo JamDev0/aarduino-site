@@ -37,8 +37,7 @@ export function HomeAnalyzing() {
 
   async function waitForResponse() {
       const waitInterval = setInterval(() => {
-      read().then(res => console.log(res))
-
+        read().then(res => console.log(res))
       // if(dataReded) {
       //   clearInterval(waitInterval)
       // }

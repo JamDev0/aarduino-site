@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSerial } from "../../../hooks/useSerial";
 
 import { ConnectButton, HomeStartContainer, StartButton } from "./styles";
@@ -9,6 +10,8 @@ export function HomeInitialize() {
   const [isStarted, setIsStarted] = useState(false)
 
   const { setReader, setWriter, writer } = useSerial()
+
+  const redirect = useNavigate()
 
   const encoder = new TextEncoder()
 
@@ -57,7 +60,7 @@ export function HomeInitialize() {
     //@ts-ignore
     await write(1)
 
-    setIsStarted(true)
+    redirect('analyzing')
   }
 
   useEffect(() => {
