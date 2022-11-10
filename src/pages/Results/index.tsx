@@ -17,7 +17,7 @@ export function Results() {
 
         setData(data.data)
       }
-    }, 100)
+    }, 500)
   }, [])
 
   useEffect(() => {
