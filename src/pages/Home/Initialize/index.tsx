@@ -63,10 +63,6 @@ export function HomeInitialize() {
     redirect('analyzing')
   }
 
-  useEffect(() => {
-    console.log(isInitialized)
-  }, [isInitialized])
-
   return (
     <HomeStartContainer>
       <ConnectButton onClick={() => handleConnectBtnClick()}>Conectar</ConnectButton>

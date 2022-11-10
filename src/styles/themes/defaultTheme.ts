@@ -3,8 +3,9 @@ export const defaultTheme = {
     background: '#E9F2F2',
     text: {
       text: '#1B1B1B',
-      carrot: '#DA7E3C',
-      grape: "#9A20E4",
+      plum: '#2a1091',
+      banana: '#eddd4a',
+      grape: "#42db84",
       button: '#F1F4F3'
     },
     green: {

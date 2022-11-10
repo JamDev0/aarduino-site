@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import { LoadingFeedback } from "../../../components/LoadingFeedback/styles";
 
-export const HomeAnalyzingContainer = styled.div`
+import { LoadingFeedback } from "../../components/LoadingFeedback/styles";
+
+export const ResultsContainer = styled.main`
+  width: 100vw;
+  height: 100vh;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  margin-top: auto;
-  margin-bottom: 8rem;
 
   font-size: 1.25rem;
   color: ${params => params.theme.colors.text.text};
