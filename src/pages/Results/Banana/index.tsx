@@ -12,7 +12,7 @@ export function ResultBanana() {
       fruit: ''
     })
 
-    redirect('../')
+    redirect('../results')
   }
 
   return (

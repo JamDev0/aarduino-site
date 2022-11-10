@@ -12,7 +12,7 @@ export function ResultGrape() {
       fruit: ''
     })
 
-    redirect('../')
+    redirect('../results')
   }
 
   return (

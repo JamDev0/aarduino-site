@@ -24,17 +24,15 @@ export function Results() {
     console.log(data)
 
     if(data?.state) {
-      switch(data.fruit) {
-        case 'UV': {
-          redirect('grape')
-        }
-        
-        case 'B': {
+      if(data.fruit == 'UV') {
+        redirect('grape')
+      } else {
+        if(data.fruit == 'B') {
           redirect('banana')
-        }
-
-        case 'A': {
-          redirect('plum')
+        } else {
+          if(data.fruit == 'A') {
+            redirect('plum')
+          }
         }
       }
     }

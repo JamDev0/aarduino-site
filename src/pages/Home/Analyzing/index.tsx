@@ -36,31 +36,26 @@ export function HomeAnalyzing() {
   useEffect(() => {
     console.log(dataReded)
     
-    switch(dataReded) {
-      case 'UV': {
-        api.patch('data', {
-          state: 'read',
-          fruit: 'UV'
-        }).then(() => setIsPached(true))
-      }
-      
-      case 'B': async () => {
+    if(dataReded == "UV") {
+      api.patch('data', {
+        state: 'read',
+        fruit: 'UV'
+      }).then(() => setIsPached(true))
+    } else {
+      if(dataReded == "B") {
         api.patch('data', {
           state: 'read',
           fruit: 'B'
         }).then(() => setIsPached(true))
+      } else {
+        if(dataReded == "A") {
+          api.patch('data', {
+            state: 'read',
+            fruit: 'A'
+          }).then(() => setIsPached(true))
+        }
       }
-      
-      case 'A': async () => {
-        api.patch('data', {
-          state: 'read',
-          fruit: 'A'
-        }).then(() => setIsPached(true))
-      }
-      
-      default:
-        break;
-      }
+    }
     }, [dataReded])
     
     useEffect(() => {
